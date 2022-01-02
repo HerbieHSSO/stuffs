@@ -1,12 +1,13 @@
 #Rock! Paper! Scissors!
-_version = "2.2.1.1"
+
+_version = "2.3"
 
 from os import name as os_name, system as console_command
 import random
 
 if os_name == "nt":
     import ctypes
-    ctypes.windll.kernel32.SetConsoleTitleW(f"Rock! Paper! Scissors! {_version}")
+    ctypes.windll.kernel32.SetConsoleTitleW("Rock! Paper! Scissors!")
 
 def clearConsole():
     if os_name == "nt":
@@ -21,20 +22,20 @@ class Main():
         self.hadWon = False
         self.hadLost = False
         self.wasADraw = False
-        input_list = ["1", "2", "3"]
+        valid_list = ["1", "2", "3"]
 
         while True:
             clearConsole()
-            print("[1]Rock\n[2]Paper\n[3]Scissors\n")   
+            print(f"Score:{self.score}\nHighscore:{self.highscore}\n\n[1]Rock\n[2]Paper\n[3]Scissors\n")   
             self.player_input = input(">")
-            while self.player_input not in input_list:
+            while self.player_input not in valid_list:
                 clearConsole() 
-                print("[1]Rock\n[2]Paper\n[3]Scissors\n")   
+                print(f"Score:{self.score}\nHighscore:{self.highscore}\n\n[1]Rock\n[2]Paper\n[3]Scissors\n")   
                 self.player_input = input(">")
                 
-            self.computer_input = random.choice(input_list)
+            self.computer_input = random.choice(valid_list)
                     
-            self.compare_and_results()
+            self.compare()
             self.handle_scores()
                 
             clearConsole()
@@ -47,66 +48,73 @@ class Main():
                 clearConsole()
                 break
             
-    def compare_and_results(self):
-        #Rock
+    def compare(self):
         if self.player_input == "1":
-            if self.computer_input == "1":
-                self.player_display = "Rock"
-                self.computer_display = "Rock"
-                self.results = "Draw"
-                self.wasADraw = True
-                
-            elif self.computer_input == "2":
-                self.player_display = "Rock"
-                self.computer_display = "Paper"
-                self.results = "You Lost"
-                self.hadLost = True  
-                
-            elif self.computer_input == "3":
-                self.player_display = "Rock"
-                self.computer_display = "Scissors"
-                self.results = "You Won"
-                self.hadWon = True
-
-        #Paper
+            self.rock()
         elif self.player_input == "2":
-            if self.computer_input == "1":
-                self.player_display = "Paper"
-                self.computer_display = "Rock"
-                self.results = "You Won"
-                self.hadWon = True
-                
-            elif self.computer_input == "2":
-                self.player_display = "Paper"
-                self.computer_display = "Paper"
-                self.results = "Draw"
-                self.wasADraw = True
-                
-            elif self.computer_input == "3":
-                self.player_display = "Paper"
-                self.computer_display = "Scissors"
-                self.results = "You Lost"
-                self.hadLost = True
-
-        #Scissors
+            self.paper()
         elif self.player_input == "3":
-            if self.computer_input == "1":
-                self.player_display = "Scissors"
-                self.computer_display = "Rock"
-                self.results = "You Lost"
-                self.hadLost = True
-                
-            elif self.computer_input == "2":
-                self.player_display = "Scissors"
-                self.computer_display = "Paper"
-                self.results = "You Won"
-                self.hadWon = True
-                
-            elif self.computer_input == "3":
-                self.player_display = "Scissors"
-                self.computer_display = "Scissors"
-                self.results = "Draw"
-                self.wasADraw = True
+            self.scissors()
+    
+    def rock(self):
+        #Rock
+        if self.computer_input == "1":
+            self.player_display = "Rock"
+            self.computer_display = "Rock"
+            self.results = "Draw"
+            self.wasADraw = True
+            
+        elif self.computer_input == "2":
+            self.player_display = "Rock"
+            self.computer_display = "Paper"
+            self.results = "You Lost"
+            self.hadLost = True  
+            
+        elif self.computer_input == "3":
+            self.player_display = "Rock"
+            self.computer_display = "Scissors"
+            self.results = "You Won"
+            self.hadWon = True
+            
+    def paper(self):
+        #Paper
+        if self.computer_input == "1":
+            self.player_display = "Paper"
+            self.computer_display = "Rock"
+            self.results = "You Won"
+            self.hadWon = True
+            
+        elif self.computer_input == "2":
+            self.player_display = "Paper"
+            self.computer_display = "Paper"
+            self.results = "Draw"
+            self.wasADraw = True
+            
+        elif self.computer_input == "3":
+            self.player_display = "Paper"
+            self.computer_display = "Scissors"
+            self.results = "You Lost"
+            self.hadLost = True
+
+    def scissors(self):
+        #Scissors
+        if self.computer_input == "1":
+            self.player_display = "Scissors"
+            self.computer_display = "Rock"
+            self.results = "You Lost"
+            self.hadLost = True
+            
+        elif self.computer_input == "2":
+            self.player_display = "Scissors"
+            self.computer_display = "Paper"
+            self.results = "You Won"
+            self.hadWon = True
+            
+        elif self.computer_input == "3":
+            self.player_display = "Scissors"
+            self.computer_display = "Scissors"
+            self.results = "Draw"
+            self.wasADraw = True
 
     def handle_scores(self):
         #Add 1-2-Score
