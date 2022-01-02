@@ -1,5 +1,5 @@
 //Hello
-//My first C# program.
+//My first C# code.
 
 using System;
 using System.Threading;
@@ -11,18 +11,18 @@ class Program
     Console.Clear();
     Console.Title = "Hello";
     Console.WriteLine("Hello there, what is your name?");
-    string user_name = Console.ReadLine();
+    string name = Console.ReadLine();
     Console.WriteLine("");
-    Console.WriteLine("Nice to meet you, {0}.", user_name);
+    Console.WriteLine("Nice to meet you, {0}.", name);
     Console.WriteLine("");
     Console.WriteLine("How old are you?");
-    int user_age = Convert.ToInt32(Console.ReadLine());
+    int age = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine("");
-    if (user_age >= 18)
+    if (age >= 18)
     {
       Console.WriteLine("Don't get yourself in trouble, okay?");
     }
-    else if (user_age < 18)
+    else if (age < 18)
     {
       Console.WriteLine("Having fun?");
     }
