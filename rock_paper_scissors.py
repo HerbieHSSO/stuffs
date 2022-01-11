@@ -1,6 +1,6 @@
 #Rock! Paper! Scissors!
 
-_version = "2.3"
+#_version = "2.3"
 
 from os import name as os_name, system as console_command
 import random
